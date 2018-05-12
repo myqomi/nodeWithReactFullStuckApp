@@ -14,10 +14,6 @@ module.exports = app => {
     res.send(req.user);
   });
 
-  app.get('/', (req, res) => {
-    console.log('sdf');
-  });
-
   app.get('/api/current_user', (req, res) => {
     console.log('current user');
     res.send(req.user);

@@ -7,16 +7,35 @@ module.exports = app => {
       scope: ['profile', 'email']
     })
   );
-  app.get('/auth/google/callback', passport.authenticate('google'));
 
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      console.log("auth")
+      res.send(req.user);
+    }
+  );
+
+  // const fetchAlbums = async ()=>{
+  //   const res =await fetch();
+  //   const json = await res.json();
+
+  // }
+  app.get(
+    '/test',
+    (req, res) => {
+      res.redirect('/api/current_user');
+    }
+  );
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   app.get('/api/current_user', (req, res) => {
-    console.log('current user');
+    console.log(req.user);
     res.send(req.user);
-    res.send();
   });
+  
 };
